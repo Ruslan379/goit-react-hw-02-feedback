@@ -6,15 +6,13 @@ import React, { Component } from 'react';
 
 export class App extends Component {
   
- 
-
   static defaultProps = {
     initialGood: 0,
     initialNeutral: 0,
     initialBad: 0,
 
     initialTotalFeedback: 0,
-    initialPositiveFeedbackPercentage: 0,
+    initialPositiveFeedback: 0,
 
   };
 
@@ -26,11 +24,14 @@ export class App extends Component {
     good: this.props.initialGood,
     neutral: this.props.initialNeutral,
     bad: this.props.initialBad,
+
+    // totalFeedback: this.props.initialTotalFeedback,
+    // positiveFeedback: this.props.initialPositiveFeedback,
   };
 
   feedBack = {
     totalFeedback: this.props.initialTotalFeedback,
-    positiveFeedbackPercentage: this.props.initialPositiveFeedbackPercentage,
+    positiveFeedback: this.props.initialPositiveFeedback,
   }
 
 
@@ -52,17 +53,43 @@ export class App extends Component {
     }));
   };
 
-  countTotalFeedback = () => {
-    this.setState(prevState => (
-      this.totalFeedback = prevState.good + prevState.neutral + prevState.bad
-      
-    ));
+
+
+  countTotalFeedback = (a, b, c) => {
+    // console.log("a: ", a); //!
+    // console.log("b: ", b); //!
+    // console.log("c: ", c); //!
+    return a + b + c
   };
 
-  render() {
-    const { good, neutral, bad } = this.state;
-    console.log(this.totalFeedback);
+  countPositiveFeedbackPercentage = (totalFeedback, good) => {
+    // console.log("a: ", a); //!
+    // console.log("b: ", b); //!
+    // console.log("c: ", c); //!
+    return (totalFeedback*100)/good
+  };
 
+
+
+  render() {
+    const { good, neutral, bad  } = this.state;
+    
+    // console.log("good: ", good); //!
+    // console.log("neutral: ", neutral); //!
+    // console.log("bad: ", bad); //!
+
+    this.feedBack.totalFeedback = this.countTotalFeedback(good, neutral, bad);
+    
+    const { totalFeedback, positiveFeedback } = this.feedBack;
+
+    this.feedBack.positiveFeedback = this.countPositiveFeedbackPercentage(totalFeedback, good,);
+
+    console.log("totalFeedback: ", totalFeedback); //!
+    console.log("positiveFeedback: ", positiveFeedback); //!
+
+    // const totalFeedback1 = this.countTotalFeedback(good, neutral, bad);
+    
+      
     return (
         
         <div className="FeedBack">
@@ -78,8 +105,9 @@ export class App extends Component {
           <p>Neutral {neutral}</p>
           <p>Bad {bad}</p>
         
-          <p>Total: {this.countTotalFeedback}</p>
-          {/* <p>Positive feedback: {completedTodoCount}</p> */}
+          {/* <p>Total: {totalFeedback1}</p> */}
+          <p>Total: {totalFeedback}</p>
+          <p>Positive feedback: {positiveFeedback}%</p>
         </div>
         
 
