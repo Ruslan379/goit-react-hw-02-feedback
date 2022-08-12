@@ -63,16 +63,15 @@ export class App extends Component {
   };
 
   countPositiveFeedbackPercentage = (totalFeedback, good) => {
-    // console.log("a: ", a); //!
-    // console.log("b: ", b); //!
-    // console.log("c: ", c); //!
-    return (totalFeedback*100)/good
+    console.log("totalFeedback: ", totalFeedback); //!
+    console.log("good: ", good); //!
+    return (good*100)/totalFeedback
   };
 
 
 
   render() {
-    const { good, neutral, bad  } = this.state;
+    const { good, neutral, bad } = this.state;
     
     // console.log("good: ", good); //!
     // console.log("neutral: ", neutral); //!
@@ -80,9 +79,11 @@ export class App extends Component {
 
     this.feedBack.totalFeedback = this.countTotalFeedback(good, neutral, bad);
     
-    const { totalFeedback, positiveFeedback } = this.feedBack;
+    const { totalFeedback } = this.feedBack;
 
-    this.feedBack.positiveFeedback = this.countPositiveFeedbackPercentage(totalFeedback, good,);
+    this.feedBack.positiveFeedback = this.countPositiveFeedbackPercentage(totalFeedback, good);
+
+    const { positiveFeedback } = this.feedBack;
 
     console.log("totalFeedback: ", totalFeedback); //!
     console.log("positiveFeedback: ", positiveFeedback); //!
