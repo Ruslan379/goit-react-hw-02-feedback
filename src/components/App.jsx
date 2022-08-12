@@ -16,9 +16,12 @@ export class App extends Component {
 
   };
 
+
   static propTypes = {
     //
   };
+
+
 
   state = {
     good: this.props.initialGood,
@@ -29,24 +32,28 @@ export class App extends Component {
     // positiveFeedback: this.props.initialPositiveFeedback,
   };
 
+  //! Дополнительная статистика feedBack
   feedBack = {
     totalFeedback: this.props.initialTotalFeedback,
     positiveFeedback: this.props.initialPositiveFeedback,
   }
 
 
+  //! good
   goodIncrement = () => {
     this.setState(prevState => ({
       good: prevState.good + 1,
     }));
   };
 
+  //! neutral
   neutralIncrement = () => {
     this.setState(prevState => ({
       neutral: prevState.neutral + 1,
     }));
   };
 
+  //! bad
   badIncrement = () => {
     this.setState(prevState => ({
       bad: prevState.bad + 1,
@@ -68,9 +75,11 @@ export class App extends Component {
     // console.log("good: ", good); //!
 
     let percentage = (good * 100) / totalFeedback;
-    // console.log("percentage: ", percentage);
-    // console.log(isNaN(percentage));
-    isNaN(percentage) ? percentage = 0 : percentage = (good * 100) / totalFeedback;
+    // console.log("percentage: ", percentage); //!
+    // console.log(isNaN(percentage)); //!
+
+    if (isNaN(percentage)) percentage = 0;
+    // isNaN(percentage) ? percentage = 0 : percentage = (good * 100) / totalFeedback;
 
     return (percentage).toFixed(0);
   };
@@ -84,21 +93,19 @@ export class App extends Component {
     // console.log("bad: ", bad); //!
 
     this.feedBack.totalFeedback = this.countTotalFeedback(good, neutral, bad);
-    // const totalFeedback1 = this.countTotalFeedback(good, neutral, bad);
+    // const totalFeedback1 = this.countTotalFeedback(good, neutral, bad); //! 2-ой вариант, более простой, без feedBack {}
     
     const { totalFeedback } = this.feedBack;
 
     this.feedBack.positiveFeedback = this.countPositiveFeedbackPercentage(totalFeedback, good);
-    // const positiveFeedback1 = this.countPositiveFeedbackPercentage(totalFeedback, good);
+    // const positiveFeedback1 = this.countPositiveFeedbackPercentage(totalFeedback1, good); //! 2-ой вариант, более простой, без feedBack {}
 
     const { positiveFeedback } = this.feedBack;
 
     // console.log("totalFeedback: ", totalFeedback); //!
     // console.log("positiveFeedback: ", positiveFeedback); //!
 
-    
     return (
-        
         <div className="FeedBack">
           <h1>Please leave feedback</h1>
 
@@ -108,9 +115,9 @@ export class App extends Component {
 
           <h1>Statistics</h1>
 
-          <p>Good {good}</p>
-          <p>Neutral {neutral}</p>
-          <p>Bad {bad}</p>
+          <p>Good: {good}</p>
+          <p>Neutral: {neutral}</p>
+          <p>Bad: {bad}</p>
         
           <p>Total: {totalFeedback}</p>
           <p>Positive feedback: {positiveFeedback}%</p>
