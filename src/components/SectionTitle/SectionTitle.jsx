@@ -6,9 +6,10 @@ export const SectionTitle = ({ total, title, NotificationMessage, children }) =>
     <div>
       {/* {title && <h1>{title}</h1>} */}
       {<h1>{title}</h1>}
+      {children}
       {/* {total && children} */}
-      {total ? children : <p>{NotificationMessage}</p>}
-      {/* {children} */}
+      {/* {total ? children : <p>{NotificationMessage}</p>}  */}
+      
     </div>
   );
 }
