@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
+import { Controls } from 'components/Controls/Controls';
+import { Statistics } from 'components/Statistics/Statistics';
 
+
+ 
 
 
 
@@ -77,8 +81,9 @@ export class App extends Component {
     let percentage = (good * 100) / total;
     // console.log("percentage: ", percentage); //!
     // console.log(isNaN(percentage)); //!
+    // console.log("initialPositivePercentage: ", this.props.initialPositivePercentage); //!
 
-    if (isNaN(percentage)) percentage = 0;
+    if (isNaN(percentage)) percentage = this.props.initialPositivePercentage;
     // isNaN(percentage) ? percentage = 0 : percentage = (good * 100) / total;
 
     return (percentage).toFixed(0);
@@ -106,22 +111,43 @@ export class App extends Component {
     // console.log("positivePercentage: ", positivePercentage); //!
 
     return (
-        <div className="FeedBack">
-          <h1>Please leave feedback</h1>
-
-          <button type="button" onClick={this.goodIncrement}>Good</button>
-          <button type="button" onClick={this.neutralIncrement}>Neutral</button>
-          <button type="button" onClick={this.badIncrement}>Bad</button>
-
-          <h1>Statistics</h1>
-
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bad: {bad}</p>
+      <div className="FeedBack">
         
-          <p>Total: {total}</p>
-          <p>Positive feedback: {positivePercentage}%</p>
-        </div>
+          <h1 className="FeedBack__title">Please leave feedback</h1>
+
+
+          {/* <div className="FeedBack__controls">
+            <button type="button" onClick={this.goodIncrement}>Good</button>
+            <button type="button" onClick={this.neutralIncrement}>Neutral</button>
+            <button type="button" onClick={this.badIncrement}>Bad</button>
+          </div> */}
+        
+          <Controls
+            good={this.goodIncrement}
+            neutral={this.neutralIncrement}
+            bad={this.badIncrement}
+          />
+        
+          {/* <div className="Statistics">
+            <h1 className="Statistics__title">Statistics</h1>
+
+            <p>Good: {good}</p>
+            <p>Neutral: {neutral}</p>
+            <p>Bad: {bad}</p>
+
+            <p>Total: {total}</p>
+            <p>Positive feedback: {positivePercentage}%</p>
+          </div> */}
+        
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
+
+      </div>
     );
   }
 }
