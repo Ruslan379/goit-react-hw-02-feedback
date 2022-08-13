@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Statistics } from 'components/Statistics/Statistics';
+import { SectionTitle } from 'components/SectionTitle/SectionTitle';
 
 
 
@@ -120,13 +121,28 @@ export class App extends Component {
             <button type="button" onClick={this.badIncrement}>Bad</button>
           </div> */}
         
-          <FeedbackOptions
+          {/* <FeedbackOptions
             good={this.goodIncrement}
             neutral={this.neutralIncrement}
             bad={this.badIncrement}
   
             onLeaveFeedback={"Please leave feedback"}
-          />
+          /> */}
+        
+        <SectionTitle title="Please leave feedback">
+          {/* <FeedbackOptions
+            good={this.goodIncrement}
+            neutral={this.neutralIncrement}
+            bad={this.badIncrement}
+          /> */}
+        </SectionTitle>
+
+        <FeedbackOptions
+          good={this.goodIncrement}
+          neutral={this.neutralIncrement}
+          bad={this.badIncrement}
+        />
+          
         
           {/* <div className="Statistics">
             <h1 className="Statistics__title">Statistics</h1>
@@ -139,13 +155,28 @@ export class App extends Component {
             <p>Positive feedback: {positivePercentage}%</p>
           </div> */}
         
-          <Statistics
+          {/* <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
             total={total}
             positivePercentage={positivePercentage}
-          />
+          /> */}
+        
+        <SectionTitle
+          total={total}
+          title="Statistics"
+          NotificationMessage="There is no feedback"
+          
+        >
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={positivePercentage}
+            />
+        </SectionTitle>
 
       </div>
     );
