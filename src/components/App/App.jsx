@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import { Controls } from 'components/Controls/Controls';
+import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Statistics } from 'components/Statistics/Statistics';
 
 
- 
 
 
 
@@ -113,8 +112,7 @@ export class App extends Component {
     return (
       <div className="FeedBack">
         
-          <h1 className="FeedBack__title">Please leave feedback</h1>
-
+          {/* <h1 className="FeedBack__title">Please leave feedback</h1> */}
 
           {/* <div className="FeedBack__controls">
             <button type="button" onClick={this.goodIncrement}>Good</button>
@@ -122,10 +120,12 @@ export class App extends Component {
             <button type="button" onClick={this.badIncrement}>Bad</button>
           </div> */}
         
-          <Controls
+          <FeedbackOptions
             good={this.goodIncrement}
             neutral={this.neutralIncrement}
             bad={this.badIncrement}
+  
+            onLeaveFeedback={"Please leave feedback"}
           />
         
           {/* <div className="Statistics">
