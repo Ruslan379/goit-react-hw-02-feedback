@@ -12,7 +12,7 @@ export class App extends Component {
     initialBad: 0,
 
     initialTotalFeedback: 0,
-    initialPositiveFeedback: 0,
+    initialPositivePercentage: 0,
 
   };
 
@@ -28,14 +28,14 @@ export class App extends Component {
     neutral: this.props.initialNeutral,
     bad: this.props.initialBad,
 
-    // totalFeedback: this.props.initialTotalFeedback,
-    // positiveFeedback: this.props.initialPositiveFeedback,
+    // total: this.props.initialTotalFeedback,
+    // positivePercentage: this.props.initialPositivePercentage,
   };
 
   //! Дополнительная статистика feedBack
   feedBack = {
-    totalFeedback: this.props.initialTotalFeedback,
-    positiveFeedback: this.props.initialPositiveFeedback,
+    total: this.props.initialTotalFeedback,
+    positivePercentage: this.props.initialPositivePercentage,
   }
 
 
@@ -70,16 +70,16 @@ export class App extends Component {
   };
 
   //! Процент положительных отзывов:
-  countPositiveFeedbackPercentage = (totalFeedback, good) => {
-    // console.log("totalFeedback: ", totalFeedback); //!
+  countPositiveFeedbackPercentage = (total, good) => {
+    // console.log("total: ", total); //!
     // console.log("good: ", good); //!
 
-    let percentage = (good * 100) / totalFeedback;
+    let percentage = (good * 100) / total;
     // console.log("percentage: ", percentage); //!
     // console.log(isNaN(percentage)); //!
 
     if (isNaN(percentage)) percentage = 0;
-    // isNaN(percentage) ? percentage = 0 : percentage = (good * 100) / totalFeedback;
+    // isNaN(percentage) ? percentage = 0 : percentage = (good * 100) / total;
 
     return (percentage).toFixed(0);
   };
@@ -92,18 +92,18 @@ export class App extends Component {
     // console.log("neutral: ", neutral); //!
     // console.log("bad: ", bad); //!
 
-    this.feedBack.totalFeedback = this.countTotalFeedback(good, neutral, bad);
+    this.feedBack.total = this.countTotalFeedback(good, neutral, bad);
     // const totalFeedback1 = this.countTotalFeedback(good, neutral, bad); //! 2-ой вариант, более простой, без feedBack {}
     
-    const { totalFeedback } = this.feedBack;
+    const { total } = this.feedBack;
 
-    this.feedBack.positiveFeedback = this.countPositiveFeedbackPercentage(totalFeedback, good);
-    // const positiveFeedback1 = this.countPositiveFeedbackPercentage(totalFeedback1, good); //! 2-ой вариант, более простой, без feedBack {}
+    this.feedBack.positivePercentage = this.countPositiveFeedbackPercentage(total, good);
+    // const positivePercentage1 = this.countPositiveFeedbackPercentage(totalFeedback1, good); //! 2-ой вариант, более простой, без feedBack {}
 
-    const { positiveFeedback } = this.feedBack;
+    const { positivePercentage } = this.feedBack;
 
-    // console.log("totalFeedback: ", totalFeedback); //!
-    // console.log("positiveFeedback: ", positiveFeedback); //!
+    // console.log("total: ", total); //!
+    // console.log("positivePercentage: ", positivePercentage); //!
 
     return (
         <div className="FeedBack">
@@ -119,8 +119,8 @@ export class App extends Component {
           <p>Neutral: {neutral}</p>
           <p>Bad: {bad}</p>
         
-          <p>Total: {totalFeedback}</p>
-          <p>Positive feedback: {positiveFeedback}%</p>
+          <p>Total: {total}</p>
+          <p>Positive feedback: {positivePercentage}%</p>
         </div>
     );
   }
