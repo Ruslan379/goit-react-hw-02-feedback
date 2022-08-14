@@ -18,7 +18,6 @@ export class App extends Component {
 
     initialTotalFeedback: 0,
     initialPositivePercentage: 0,
-
   };
 
 
@@ -37,11 +36,21 @@ export class App extends Component {
     // positivePercentage: this.props.initialPositivePercentage,
   };
 
+
   //! Дополнительная статистика feedBack
   feedBack = {
     total: this.props.initialTotalFeedback,
     positivePercentage: this.props.initialPositivePercentage,
   }
+
+
+//! onIncrement - для ВСЕХ КНОПОК
+  onIncrement = (evt) => {
+    const btnName = evt.currentTarget.name;
+    this.setState(prev => ({
+      [btnName]: (prev[btnName] + 1),
+    }));
+  };
 
 
   //! good
@@ -51,12 +60,14 @@ export class App extends Component {
     }));
   };
 
+
   //! neutral
   neutralIncrement = () => {
     this.setState(prevState => ({
       neutral: prevState.neutral + 1,
     }));
   };
+
 
   //! bad
   badIncrement = () => {
@@ -66,16 +77,22 @@ export class App extends Component {
   };
 
 
-  //! Отображение общего количества собранных отзывов из всех категорий:
-  countTotalFeedback = (good, neutral, bad) => {
+  //! Отображение общего количества собранных отзывов из всех категорий: 1-ый вариант
+  countTotalFeedback1 = (good, neutral, bad) => {
     // console.log("good: ", good); //!
     // console.log("neutral: ", neutral); //!
     // console.log("bad: ", bad); //!
     return (good + neutral + bad);
   };
 
-  //! Процент положительных отзывов:
-  countPositiveFeedbackPercentage = (total, good) => {
+  //* Отображение общего количества собранных отзывов из всех категорий: 2-ой вариант
+  countTotalFeedback2 = () => {
+    return Object.values(this.state).reduce((accum, item) => accum + item, 0);
+  };
+
+
+  //! Процент положительных отзывов: 1-ый вариант
+  countPositiveFeedbackPercentage1 = (total, good) => {
     // console.log("total: ", total); //!
     // console.log("good: ", good); //!
 
@@ -91,6 +108,15 @@ export class App extends Component {
   };
 
 
+//* Процент положительных отзывов: 2-ой вариант
+  countPositiveFeedbackPercentage2 = () => {
+
+    return (this.state.good / this.countTotalFeedback2() * 100).toFixed(0);;
+  };
+
+
+
+
 
   render() {
     const { good, neutral, bad } = this.state;
@@ -98,13 +124,17 @@ export class App extends Component {
     // console.log("neutral: ", neutral); //!
     // console.log("bad: ", bad); //!
 
-    this.feedBack.total = this.countTotalFeedback(good, neutral, bad);
-    // const totalFeedback1 = this.countTotalFeedback(good, neutral, bad); //! 2-ой вариант, более простой, без feedBack {}
+    //! Отображение общего количества собранных отзывов из всех категорий:
+    // this.feedBack.total = this.countTotalFeedback1(good, neutral, bad); //! 1-ый вариант
+    this.feedBack.total = this.countTotalFeedback2(); //* 2-ой вариант
+    // const totalFeedback1 = this.countTotalFeedback(good, neutral, bad); //? 3-ий вариант, более простой, без feedBack {}
     
     const { total } = this.feedBack;
 
-    this.feedBack.positivePercentage = this.countPositiveFeedbackPercentage(total, good);
-    // const positivePercentage1 = this.countPositiveFeedbackPercentage(totalFeedback1, good); //! 2-ой вариант, более простой, без feedBack {}
+    //! Процент положительных отзывов:
+    // this.feedBack.positivePercentage = this.countPositiveFeedbackPercentage1(total, good); //! 1-ый вариант
+    this.feedBack.positivePercentage = this.countPositiveFeedbackPercentage2(); //* 2-ой вариант
+    // const positivePercentage1 = this.countPositiveFeedbackPercentage(totalFeedback1, good); //? 3-ий вариант, более простой, без feedBack {}
 
     const { positivePercentage } = this.feedBack;
 
@@ -140,11 +170,19 @@ export class App extends Component {
         
         <SectionTitle title="Please leave feedback">
           <FeedbackOptions
-            // options={this.state}
+            options={this.state}
+
+            // key1={this.increment}
+
             good={this.goodIncrement}
             neutral={this.neutralIncrement}
             bad={this.badIncrement}
           />
+
+          {/* {Object.keys(this.state).map(key => (
+            <button key={key}>{key}</button>
+          ))} */}
+
         </SectionTitle>
 
         {/* <FeedbackOptions
