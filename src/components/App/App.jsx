@@ -6,6 +6,8 @@ import { Statistics } from 'components/Statistics/Statistics';
 import { SectionTitle } from 'components/SectionTitle/SectionTitle';
 import { NotificationMessage } from 'components/NotificationMessage/NotificationMessage';
 
+import css from 'components/App/App.module.css' //todo = старый вариант импорта стилей
+
 
 
 
@@ -169,7 +171,7 @@ export class App extends Component {
     
 
     return (
-      <div className="FeedBack">
+      <div className={css.FeedBack}>
         
           {/* <h1 className="FeedBack__title">Please leave feedback</h1> */}
 
