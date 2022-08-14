@@ -45,11 +45,13 @@ export class App extends Component {
 
 
 //! onIncrement - для ВСЕХ КНОПОК
-  onIncrement = (evt) => {
-    const btnName = evt.currentTarget.name;
-    this.setState(prev => ({
-      [btnName]: (prev[btnName] + 1),
-    }));
+  onIncrement = event => {
+    const btnName = (event.target.textContent).toLowerCase();
+
+    // console.log('event.target:', event.target.textContent); //!
+    // console.log('btnNamt:', btnName); //!
+
+    this.setState(prevState => ({ [btnName]: (prevState[btnName] + 1) }));
   };
 
 
@@ -169,15 +171,25 @@ export class App extends Component {
           /> */}
         
         <SectionTitle title="Please leave feedback">
-          <FeedbackOptions
-            options={this.state}
+          
+          <div className="FeedBack__options">
 
-            // key1={this.increment}
+            <button type="button" onClick={this.onIncrement}>Good</button>
+            <button type="button" onClick={this.onIncrement}>Neutral</button>
+            <button type="button" onClick={this.onIncrement}>Bad</button>
+
+            {/* {Object.keys(options).map(key => (
+              <button key={key} type="button" onClick={key1}>{key}</button>
+            ))}  */}
+          </div>
+
+          {/* <FeedbackOptions
+            options={this.state}
 
             good={this.goodIncrement}
             neutral={this.neutralIncrement}
             bad={this.badIncrement}
-          />
+          /> */}
 
           {/* {Object.keys(this.state).map(key => (
             <button key={key}>{key}</button>
@@ -228,7 +240,8 @@ export class App extends Component {
             :
             <NotificationMessage
               message="There is no feedback"
-            />} 
+            />}
+          
         </SectionTitle>
       </div>
     );
