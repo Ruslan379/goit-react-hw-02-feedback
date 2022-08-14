@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const SectionTitle = ({ total, title, NotificationMessage, children }) => {
+export const SectionTitle = ({ title, total, NotificationMessage, children }) => {
   return (
     <div>
       {/* {title && <h1>{title}</h1>} */}

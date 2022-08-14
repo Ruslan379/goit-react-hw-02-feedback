@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
+import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Statistics } from 'components/Statistics/Statistics';
 import { SectionTitle } from 'components/SectionTitle/SectionTitle';
 import { NotificationMessage } from 'components/NotificationMessage/NotificationMessage';
@@ -109,10 +109,8 @@ export class App extends Component {
     return (percentage).toFixed(0);
   };
 
-
 //* Процент положительных отзывов: 2-ой вариант
   countPositiveFeedbackPercentage2 = () => {
-
     return (this.state.good / this.countTotalFeedback2() * 100).toFixed(0);;
   };
 
@@ -171,25 +169,15 @@ export class App extends Component {
           /> */}
         
         <SectionTitle title="Please leave feedback">
-          
-          <div className="FeedBack__options">
-
-            <button type="button" onClick={this.onIncrement}>Good</button>
-            <button type="button" onClick={this.onIncrement}>Neutral</button>
-            <button type="button" onClick={this.onIncrement}>Bad</button>
-
-            {/* {Object.keys(options).map(key => (
-              <button key={key} type="button" onClick={key1}>{key}</button>
-            ))}  */}
-          </div>
-
-          {/* <FeedbackOptions
+  
+          <FeedbackOptions
+            onLeaveFeedback={this.onIncrement}
             options={this.state}
 
-            good={this.goodIncrement}
-            neutral={this.neutralIncrement}
-            bad={this.badIncrement}
-          /> */}
+            // good={this.goodIncrement}
+            // neutral={this.neutralIncrement}
+            // bad={this.badIncrement}
+          />
 
           {/* {Object.keys(this.state).map(key => (
             <button key={key}>{key}</button>
@@ -224,8 +212,8 @@ export class App extends Component {
           /> */}
         
         <SectionTitle
-          // total={total}
           title="Statistics"
+          // total={total}
           // NotificationMessage="There is no feedback"
         >
           {total
