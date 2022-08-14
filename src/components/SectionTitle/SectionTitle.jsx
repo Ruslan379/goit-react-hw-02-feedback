@@ -15,8 +15,8 @@ export const SectionTitle = ({ title, total, NotificationMessage, children }) =>
 }
 
 SectionTitle.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.node,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 

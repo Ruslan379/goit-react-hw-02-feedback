@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Statistics } from 'components/Statistics/Statistics';
@@ -22,7 +23,25 @@ export class App extends Component {
 
 
   static propTypes = {
-    //
+    initialGood: PropTypes.number.isRequired,
+    initialNeutral: PropTypes.number.isRequired,
+    initialBad: PropTypes.number.isRequired,
+
+    initialTotalFeedback: PropTypes.number.isRequired,
+    initialPositivePercentage: PropTypes.number.isRequired,
+
+    good: PropTypes.number,
+    neutral: PropTypes.number,
+    bad: PropTypes.number,
+
+    total: PropTypes.number,
+    positivePercentage: PropTypes.number,
+
+    title: PropTypes.string,
+    message: PropTypes.string,
+
+    options: PropTypes.object,
+    onLeaveFeedback: PropTypes.func,
   };
 
 
@@ -111,7 +130,7 @@ export class App extends Component {
 
 //* Процент положительных отзывов: 2-ой вариант
   countPositiveFeedbackPercentage2 = () => {
-    return (this.state.good / this.countTotalFeedback2() * 100).toFixed(0);;
+    return Number((this.state.good / this.countTotalFeedback2() * 100).toFixed(0));;
   };
 
 
@@ -171,8 +190,8 @@ export class App extends Component {
         <SectionTitle title="Please leave feedback">
   
           <FeedbackOptions
-            onLeaveFeedback={this.onIncrement}
             options={this.state}
+            onLeaveFeedback={this.onIncrement}
 
             // good={this.goodIncrement}
             // neutral={this.neutralIncrement}

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CapitalizeFirstLetter } from 'components/CapitalizeFirstLetter/CapitalizeFirstLetter';
 
 // const CapitalizeFirstLetter = (str) => {
 //   return str[0].toUpperCase() + str.substring(1)
 // }
 
-export const FeedbackOptions = ({ onLeaveFeedback, options, good, neutral, bad, LeaveFeedback }) => (
+export const FeedbackOptions = ({ options, onLeaveFeedback, good, neutral, bad, LeaveFeedback }) => (
   <div className="FeedBack__options">
     {/* <h1 className="FeedBack__title">{LeaveFeedback}</h1> */}
 
@@ -22,5 +23,10 @@ export const FeedbackOptions = ({ onLeaveFeedback, options, good, neutral, bad, 
     ))} 
   </div>
 );
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.object.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
 
 
