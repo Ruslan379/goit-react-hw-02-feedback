@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CapitalizeFirstLetter } from 'components/CapitalizeFirstLetter/CapitalizeFirstLetter';
+import { CapitalizeFirstLetter } from 'services/CapitalizeFirstLetter';
 
 import css from 'components/FeedbackOptions/FeedbackOptions.module.css' //todo = старый вариант импорта стилей
 

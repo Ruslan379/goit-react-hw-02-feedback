@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import css from 'components/SectionTitle/SectionTitle.module.css' //todo = старый вариант импорта стилей
+import css from 'components/SectionTitle/SectionTitle.module.css' 
 
 export const SectionTitle = ({ title, children }) => {
   return (

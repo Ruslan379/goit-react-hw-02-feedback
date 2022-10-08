@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import css from 'components/NotificationMessage/NotificationMessage.module.css' //todo = старый вариант импорта стилей
+import css from 'components/NotificationMessage/NotificationMessage.module.css' 
 
 
 export const NotificationMessage = ({ message }) => {
